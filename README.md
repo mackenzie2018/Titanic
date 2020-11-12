@@ -42,12 +42,13 @@ Choosing the regularisation parameter `C` is a bit arbitrary. Too big and the cl
 So I'll start try several. Using `C = [0.01, 0.1, 1, 10, 100, 1000]` I got the following survival rate predictions on the `test` set (`random_state=1337` using a radial basis function and default gamma):
 
 C value | predicted survival rate
-0.01 | 0%
-0.1  | 36.3%
-1 | 35.8%
-10 | 27.7%
-100 | 27.3%
-1000 | 30.8%
+------- | -----------------------
+0.01 	| 0%
+0.1  	| 36.3%
+1 		| 35.8%
+10 		| 27.7%
+100 	| 27.3%
+1000 	| 30.8%
 
 The first, 0% survival, seems a bit harsh. I also don't need to go to the trouble of teaching a computer to do predict that nobody survived. Then again, it may be useful to know how correct this bleak, bleak prediction is so I'll submit it anyway.
 
@@ -57,11 +58,12 @@ A `C` value of 1000 is between the two, so I'll also submit these predictions.
 
 Submitting to Kaggle, they scored... 
 
-C value | predicted survival rate | score
-0.01 | 0% | 62.2%
-1 | 35.8% | 77.0%
-10 | 27.7% | 77.99%
-1000 | 30.8% | 77.8%
+C value	| predicted survival rate 	| score
+-------	| -----------------------	| -----
+0.01 	| 0%	| 62.2%
+1 		| 35.8%	| 77.0%
+10 		| 27.7%	| 77.99%
+1000 	| 30.8%	| 77.8%
 
 Interesting.
 
