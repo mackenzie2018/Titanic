@@ -78,9 +78,9 @@ Having firmly established that mediocre efforts yield barely-better-than-mediocr
 The first two Run's stubborness to move out of the 75% scoring range reflects the crudeness of the approaches taken, particularly in respect of the data itself.
 
 So as to avoid changing too much at once (after all, isn't the point here to learn?) I will stick to incremental changes for now. To wit, I have modestly expanded the feature engineering side of things as follows:
-	- Replaced the `Embarked` column with three dummy columns.
-	- Ditto `Pclass`.
-	- Added `len_name`, the number of characters in the `Name` column. (Hunch: richer people tend to have longer names, richer people more likely to survive.)
+- Replaced the `Embarked` column with three dummy columns.
+- Ditto `Pclass`.
+- Added `len_name`, the number of characters in the `Name` column. (Hunch: richer people tend to have longer names, richer people more likely to survive.)
 	
 Starting off with a `LogisticRegression` classifier again using `C = [0.01, 0.025, 0.05, 0.075, 0.1, 1, 10, 100, 1000], random_state=117` and following it up with an `SVM` with the same parameters yielded the following predictions and scores:
 
