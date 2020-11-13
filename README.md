@@ -4,7 +4,7 @@ After avoiding it for a while, I thought it time to really dive into Kaggle comp
 
 The titanic problem as a first port of call seemed logical. As good as any other, at least.
 
-## Attempt 1: A (Very) Rough Logistic Regression
+## Run 1: A (Very) Rough Logistic Regression
 
 Being generally pre-disposed to pick the low-hanging fruit, I thought I would start off with a rough and dirty logistic regression. No frills, no messing with the default parameters.
 
@@ -27,7 +27,7 @@ Predicting and submitting the predictions to Kaggle the result was...
 
 Not great, but also not terrible considering.
 
-## Attempt 2: How about a Support Vector Machine?
+## Run 2: How about a Support Vector Machine?
 
 Low-hanging fruit remain. Perhaps a large-margin classifier will yield better results. Not knowing the true survival rate aboard the ship, bare intuition tell's us (or tells me, at least) that surviving the Titanic is a low-probability event.
 
@@ -70,3 +70,30 @@ Interesting.
 A 1% improvement on the very basic logistic regression of the same lightly processed `X_train, y_train` data.
 
 We can do a lot better. Back to the drawing board.
+
+## Run 3: A (Slightly) More Nuanced Approach
+
+Having firmly established that mediocre efforts yield barely-better-than-mediocre results it is now time to put more effort into the data processing.
+
+The first two Run's stubborness to move out of the 75% scoring range reflects the crudeness of the approaches taken, particularly in respect of the data itself.
+
+So as to avoid changing too much at once (after all, isn't the point here to learn?) I will stick to incremental changes for now. To wit, I have modestly expanded the feature engineering side of things as follows:
+	- Replaced the `Embarked` column with three dummy columns.
+	- Ditto `Pclass`.
+	- Added `len_name`, the number of characters in the `Name` column. (Hunch: richer people tend to have longer names, richer people more likely to survive.)
+	
+Starting off with a `LogisticRegression` classifier again using `C = [0.01, 0.025, 0.05, 0.075, 0.1, 1, 10, 100, 1000], random_state=117` and following it up with an `SVM` with the same parameters yielded the following predictions and scores:
+
+C	| LogReg Predicted Survival Rate	| LogReg Score | SVM Predicted Survival Rate | SVM Score
+----| -----------------------	| ----- | -------- | ----------------
+0.01| 19%	| 77.5% | 0% | not submitted
+0.025| 25.1% | 78.7% | 19.1% | 77.5%
+0.1 | 34.7%	| 78.2% | 26.6% | 77.7%
+1	| 37.6%	| 76.8% | 26.6% | 77.7%
+10	| 37.8%	| 77.0% | 29.2% | 78.0%
+100	| 37.8%	| not submitted | 34.2% | not submitted
+1000| 37.8%	| not submitted | 40.4% | not submitted
+
+We're not flying yet but our eyes have just about managed to peek out over the canopy.
+
+I think it's time to venture out and try other classification algorithms like `DecisionTree`, `KNN`, or `RandomForest.
