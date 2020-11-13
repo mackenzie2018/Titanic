@@ -96,4 +96,4 @@ C	| LogReg Predicted Survival Rate	| LogReg Score | SVM Predicted Survival Rate 
 
 We're not flying yet but our eyes have just about managed to peek out over the canopy.
 
-I think it's time to venture out and try other classification algorithms like `DecisionTree`, `KNN`, or `RandomForest.
+I think it's time to venture out and try other classification algorithms like `DecisionTree`, `KNN`, or `RandomForest`.
