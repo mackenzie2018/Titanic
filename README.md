@@ -126,7 +126,7 @@ neighbours	| predicted survival rate 	| score
 13 	| 33.4%	| 77.5%
 17 | 32.3%	| 77.7%
 
-Perhaps weighting by `distance` wasn't too smart. After all, don't we want to all k neighbours to have equal say?
+Perhaps weighting by `distance` wasn't too smart. After all, don't we want all k neighbours to have equal say?
 
 Running the classifier again with `weights='uniform'`, the results were:
 
