@@ -182,8 +182,39 @@ Progress! We've broken the 80% mark. The only way is up.
 
 General feeling at this point is very much that algorithm selection and parameter tuning is where to look for gains. I'm aiming for _minimum_ 90%.
 
+## Run 7: It's Not A Feature, It's A Bug
 
+It struck me that my `len_name` feature may have been stupid. I dropped it from the `train` and `test` sets, re-ran the `RandomForestClassifier` from Run 6, on a hunch.
 
+No significant change, slightly worse scores. Never mind.
 
+## Run 8: Randomised Search
 
+Anyway, decided to let SciKit do more of the heavy lifting by implementing a `RandomizedSearchCV` with the following parameters:
+```	
+params = {
+	"n_estimators":[2, 5, 10, 20, 50, 100, 250, 500, 1000],
+	"criterion":["gini","entropy"],
+	"max_features":["log2","sqrt"],
+	"bootstrap":[True,False]
+},
+cv=5, 
+n_iter=10, 
+n_jobs=-1, 
+random_state=3
+```
 
+The best parameters it found yielded a `best_score_` of 81.3 and were:
+
+```
+{
+	'n_estimators': 250,
+	'max_features': 'log2',
+	'criterion': 'gini',
+	'bootstrap': True
+}
+ ```
+
+Submitting to Kaggle got a score of...
+
+78.0%.
