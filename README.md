@@ -102,7 +102,7 @@ We're not flying yet but our eyes have just about managed to peek out over the c
 
 I think it's time to venture out and try other classification algorithms like `DecisionTree`, `KNN`, or `RandomForest`.
 
-## Run4: Vox Populi, Vox Informatio | KNN
+## Run 4: Vox Populi, Vox Informatio | KNN
 
 Overture: the format of the competition isn't all that great as far as optimisation goes. Not having access to precision/recall/F1-score figures leaves you to follow your nose. Fine, but perhaps not all that scientific? Are they called Data Scientists because Data Janitors wouldn't have anyone clamouring for a career change? 
 
@@ -137,3 +137,53 @@ neighbours	| predicted survival rate 	| score
 9 	| 34.2%	| 76.8%
 13 	| 33.0%	| 79.0%
 17 | 31.6%	| 78.5%
+
+Hmm. I'm beginning to suspect that the feature engineering field lies fallow. That leaves clever algorithm selection and parameter tuning to break through the c. 80% scoring region.
+
+For the sake of completeness, and to satisfy my curiosity, I want to try `DecisionTree` and `RandomForest` classifiers.
+
+## Run 5: Decisions, Decisions
+
+I have some reservations about using `DecisionTreeClassifier()`. Chief among them the imabalance of the dataset.
+
+But let's see what happens.
+
+I'll do two runs, using a `DecisionTreeClassifier` with the following non-default parameters:
+- `random_state=33`
+- first with `criterion='entropy'`, more computationally expensive but that shouldn't be a problem here. I have a better intuitive understanding of entropy at the moment.
+- then with `crierion='gini'`.
+
+Cross-val scores on these results aren't promising, but we'll submit anyway. This yielded the following results:
+
+Criterion | Predicted Survival Rate | Score
+--------- | ----------------------- | -----
+gini | 39.2% | 71.3%
+entropy | 37.8% | 72.3%
+
+About what I expected from a single tree.
+
+## Run 6: Stochastic Timber
+
+Upping the ante a bit, let's try a `RandomForest` classifier:
+- `random_state=21`
+- `criterion='entropy'`
+- `n_estimators=[2,5,10,20]`
+
+The results:
+
+Estimators | Predicted Survival Rate | Score
+---------- | ----------------------- | -----
+2 | 22.7% | 74.0%
+5 | 37.7% | 75.6%
+10 | 30.4% | 80.1%
+20 | 31.1% | 79.9%
+
+Progress! We've broken the 80% mark. The only way is up.
+
+General feeling at this point is very much that algorithm selection and parameter tuning is where to look for gains. I'm aiming for _minimum_ 90%.
+
+
+
+
+
+
